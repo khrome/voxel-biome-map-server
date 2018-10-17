@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>A simple map</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<script>
+var customCRS = L.extend(L.CRS.Simple, {
+    projection: L.extend( L.Projection.LonLat, {
+        bounds: L.bounds([-1000000, -1000000], [1000000, 1000000])
+    }),
+    transformation: new L.Transformation(1, 0, 1, 0),
+    scale: function (zoom) {
+        return 4;
+    },
+    infinite: false
+});
+var map = L.map('map',{
+		crs: customCRS,
+        minZoom : 17,
+        maxZoom: 17
+}).setView([0, 0], 17);
+L.control.scale({imperial: false}).addTo(map);
+//L.control.mousePosition().addTo(map);
+L.mapbox.accessToken = 'pk.eyJ1Ijoia2hyb21lIiwiYSI6IlJCSUFyc28ifQ.Spd8g-2eViwQySTUdFWLGg';
+var layer = L.tileLayer(
+    'http://localhost:8081/tiles/freeture/localhost/{x}/0/{y}/20.png'
+).addTo(map);
+map.setView([0, 0]);
+</script>
+</body>
+</html>

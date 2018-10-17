@@ -1,0 +1,11 @@
+{
+  "name": "voxel-biome-map-server",
+  "version": "0.0.1",
+  "main": "map-server.js",
+  "dependencies": {
+    "async": "^2.6.1",
+    "canvas": "^1.6.12",
+    "express": "^4.16.3",
+    "request": "^2.88.0"
+  }
+}
